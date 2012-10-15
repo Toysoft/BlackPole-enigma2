@@ -5725,7 +5725,7 @@ msgid "Subtitle selection..."
 msgstr ""
 
 msgid "Subtitle settings"
-msgstr "OpenPLi Advanced Subtitles"
+msgstr "Subtitle Settings"
 
 #
 msgid "Subtitles"

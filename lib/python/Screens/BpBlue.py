@@ -265,7 +265,7 @@ class BhsysInfo(Screen):
 		f = open("/etc/bpversion",'r')
 		text += "Firmware v.:\t" + f.readline()
 		f.close()
-		text += "DvbApp v.: \t" +  about.getEnigmaVersionString() + "\n"
+		text += "Enigma2 v.: \t" +  about.getEnigmaVersionString() + "\n"
 		text += "Kernel v.: \t" +  about.getKernelVersionString() + "\n"
 		
 		self["lab1"].setText(text)
