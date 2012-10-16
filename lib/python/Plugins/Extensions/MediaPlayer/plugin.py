@@ -971,7 +971,7 @@ def main(session, **kwargs):
 	session.open(MediaPlayer)
 
 def menu(menuid, **kwargs):
-	if menuid == "mainmenu" and config.mediaplayer.onMainMenu.getValue():
+	if menuid == "mainmenu":
 		return [(_("Media player"), main, "media_player", 45)]
 	return []
 
