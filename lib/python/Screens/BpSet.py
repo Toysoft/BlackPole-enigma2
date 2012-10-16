@@ -10,8 +10,8 @@ from Components.Network import iNetwork
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import fileExists, pathExists, resolveFilename, SCOPE_CURRENT_SKIN
 from os import system, remove as os_remove, rename as os_rename, popen, getcwd, chdir
-from Plugins.SystemPlugins.NetworkBrowser.NetworkBrowser import NetworkBrowser
 from Screens.Setup import Setup
+from Plugins.SystemPlugins.NetworkBrowser.NetworkBrowser import NetworkBrowser
 
 
 
@@ -56,29 +56,34 @@ class DeliteSettings(Screen):
 		elif self.sel == 1:
 			self.session.open(BhNetBrowser)
 		elif self.sel == 2:
+			from Plugins.Extensions.DLNABrowser.plugin import DLNADeviceBrowser
+			self.session.open(DLNADeviceBrowser)
+		elif self.sel == 3:
+			self.session.open(BhMinidlna)
+		elif self.sel == 4:
 			from Screens.BpFormat import Bp_UsbFormat
 			self.session.open(Bp_UsbFormat)
-		elif self.sel == 3:
+		elif self.sel == 5:
 			from Screens.BpDevice import BlackPoleSwap
 			self.session.open(BlackPoleSwap)
-		elif self.sel == 4:
+		elif self.sel == 6:
 			self.session.open(Setup, "userinterface")
-		elif self.sel == 5:
+		elif self.sel == 7:
 			from Plugins.SystemPlugins.UIPositionSetup.plugin import UIPositionSetup
 			self.session.open(UIPositionSetup)
-		elif self.sel == 6:
+		elif self.sel == 8:
 			from Plugins.SystemPlugins.UI3DSetup.plugin import UI3DSetupScreen
 			self.session.open(UI3DSetupScreen)
-		elif self.sel == 7:
-			self.session.open(Setup, "epgsettings")
-		elif self.sel == 8:
-			self.session.open(Setup, "recording")
 		elif self.sel == 9:
+			self.session.open(Setup, "epgsettings")
+		elif self.sel == 10:
+			self.session.open(Setup, "recording")
+		elif self.sel == 11:
 			from Screens.RecordPaths import RecordPathsSettings
 			self.session.open(RecordPathsSettings)
-		elif self.sel == 10:
+		elif self.sel == 12:
 			self.session.open(Setup, "subtitlesetup")
-		elif self.sel == 11:
+		elif self.sel == 13:
 			self.session.open(Setup, "autolanguagesetup")
 		
 		else:
@@ -104,78 +109,92 @@ class DeliteSettings(Screen):
 		
 		mypixmap = mypath + "icons/mountwizard.png"
 		png = LoadPixmap(mypixmap)
-		name = "Network Browse & Mountpoints"
+		name = "Network Browser & Mountpoints"
 		idx = 1
+		res = (name, png, idx)
+		self.list.append(res)
+		
+		mypixmap = mypath + "icons/infopanel_samba.png"
+		png = LoadPixmap(mypixmap)
+		name = "Dlna Browser & UPnP Client"
+		idx = 2
+		res = (name, png, idx)
+		self.list.append(res)
+		
+		mypixmap = mypath + "icons/infopanel_samba.png"
+		png = LoadPixmap(mypixmap)
+		name = "Dlna Server Minidlna"
+		idx = 3
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_space.png"
 		png = LoadPixmap(mypixmap)
 		name = "Usb Format Wizard"
-		idx = 2
+		idx = 4
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/swapsettings.png"
 		png = LoadPixmap(mypixmap)
 		name = "Swap File settings"
-		idx = 3
-		res = (name, png, idx)
-		self.list.append(res)
-		
-		mypixmap = mypath + "icons/infopanel_osd.png"
-		png = LoadPixmap(mypixmap)
-		name = "Osd settings"
-		idx = 4
-		res = (name, png, idx)
-		self.list.append(res)
-		
-		mypixmap = mypath + "icons/infopanel_osd.png"
-		png = LoadPixmap(mypixmap)
-		name = "Osd Position setup"
 		idx = 5
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_osd.png"
 		png = LoadPixmap(mypixmap)
-		name = "Osd 3D setup"
+		name = "Osd settings"
 		idx = 6
+		res = (name, png, idx)
+		self.list.append(res)
+		
+		mypixmap = mypath + "icons/infopanel_osd.png"
+		png = LoadPixmap(mypixmap)
+		name = "Osd Position setup"
+		idx = 7
+		res = (name, png, idx)
+		self.list.append(res)
+		
+		mypixmap = mypath + "icons/infopanel_osd.png"
+		png = LoadPixmap(mypixmap)
+		name = "Osd 3D setup"
+		idx = 8
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_samba.png"
 		png = LoadPixmap(mypixmap)
 		name = "Internal Epg settings"
-		idx = 7
+		idx = 9
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_cron.png"
 		png = LoadPixmap(mypixmap)
 		name = "Record settings"
-		idx = 8
+		idx = 10
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_space.png"
 		png = LoadPixmap(mypixmap)
 		name = "Recording paths"
-		idx = 9
+		idx = 11
 		res = (name, png, idx)
 		self.list.append(res)
 				
 		mypixmap = mypath + "icons/infopanel_kmod.png"
 		png = LoadPixmap(mypixmap)
 		name = "Subtitle settings"
-		idx = 10
+		idx = 12
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/inadynsettings.png"
 		png = LoadPixmap(mypixmap)
 		name = "Auto language settings"
-		idx = 11
+		idx = 13
 		res = (name, png, idx)
 		self.list.append(res)
 		
@@ -226,4 +245,85 @@ class BhNetBrowser(Screen):
 		if mysel:
 			inter = mysel[1]
 			self.session.open(NetworkBrowser, inter, "/usr/lib/enigma2/python/Plugins/SystemPlugins/NetworkBrowser")
+
+
+class BhMinidlna(Screen):
+	skin = """
+	<screen position="center,center" size="602,405" title="Black Hole UPnP Minidlna Server Panel">
+		<widget name="lab1" position="20,20" size="580,260" font="Regular;20" valign="center" transparent="1"/>
+		<widget name="lab2" position="20,300" size="300,30" font="Regular;20" valign="center" transparent="1"/>
+		<widget name="labstop" position="320,300" size="150,30" font="Regular;20" valign="center" halign="center" backgroundColor="red"/>
+		<widget name="labrun" position="320,300" size="150,30" zPosition="1" font="Regular;20" valign="center" halign="center" backgroundColor="green"/>
+		<ePixmap pixmap="skin_default/buttons/red.png" position="125,360" size="150,30" alphatest="on"/>
+		<ePixmap pixmap="skin_default/buttons/green.png" position="325,360" size="150,30" alphatest="on"/>
+		<widget name="key_red" position="125,362" zPosition="1" size="150,25" font="Regular;20" halign="center" backgroundColor="transpBlack" transparent="1"/>
+		<widget name="key_green" position="325,362" zPosition="1" size="150,25" font="Regular;20" halign="center" backgroundColor="transpBlack" transparent="1"/>
+	</screen>"""
+	
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		
+		mytext = "Minidlna: UPnP media server Black Pole version.\nMinidlna is fully configured for your box and ready to work. Just enable it and play.\nMinidlna include little web interface.\n\nMinidlna webif url: http://ip_box:8200\nMinidlna config: /etc/minidlna.conf\nMinidlna home site: http://sourceforge.net/projects/minidlna/"
+		self["lab1"] = Label(mytext)
+		self["lab2"] = Label(_("Current Status:"))
+		self["labstop"] = Label(_("Stopped"))
+		self["labrun"] = Label(_("Running"))
+		self["key_red"] = Label("Enable")
+		self["key_green"] = Label("Disable")
+		self.my_serv_active = False
+				
+		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
+		{
+			"ok": self.close,
+			"back": self.close,
+			"red": self.ServStart,
+			"green": self.ServStop
+		})
+		
+		self.onLayoutFinish.append(self.updateServ)
+
+	def ServStart(self):
+		if self.my_serv_active == True:
+			self.session.open(MessageBox, "Minidlna already up and running.", MessageBox.TYPE_INFO)
+		else:
+			rc = system("ln -s ../init.d/minidlna /etc/rc3.d/S90minidlna")
+			rc = system("/etc/init.d/minidlna start")
+			mybox = self.session.open(MessageBox, "Minidlna Server Enabled.", MessageBox.TYPE_INFO)
+			mybox.setTitle("Info")
+			self.updateServ()
+			
+		
+	def ServStop(self):
+		if self.my_serv_active == True:
+			rc = system("/etc/init.d/minidlna stop")
+			if fileExists("/etc/rc3.d/S90minidlna"):
+				os_remove("/etc/rc3.d/S90minidlna")
+				
+			mybox = self.session.open(MessageBox, "Minidlna Server Disabled.", MessageBox.TYPE_INFO)
+			mybox.setTitle("Info")
+			rc = system("sleep 1")
+			self.updateServ()
+		
+
+	def updateServ(self):
+		self["labrun"].hide()
+		self["labstop"].hide()
+		rc = system("ps > /tmp/nvpn.tmp")
+		self.my_serv_active = False
+		
+		if fileExists("/tmp/nvpn.tmp"):
+			f = open("/tmp/nvpn.tmp",'r')
+ 			for line in f.readlines():
+				if line.find('minidlna') != -1:
+					self.my_serv_active = True
+			f.close()
+			os_remove("/tmp/nvpn.tmp")
+		
+			
+		if self.my_serv_active == True:
+			self["labstop"].hide()
+			self["labrun"].show()
+		else:
+			self["labstop"].show()
+			self["labrun"].hide()
 
