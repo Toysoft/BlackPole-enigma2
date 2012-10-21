@@ -207,14 +207,16 @@ class BhsysInfo(Screen):
 	
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["lab1"] =  Label()
+		self["lab1"] =  ScrollLabel()
 
 		self.onShow.append(self.updateInfo)
 		
-		self["myactions"] = ActionMap(["OkCancelActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
 		{
 			"ok": self.close,
 			"cancel": self.close,
+			"up": self["lab1"].pageUp,
+			"down": self["lab1"].pageDown
 		}, -1)
 		
 	def updateInfo(self):
