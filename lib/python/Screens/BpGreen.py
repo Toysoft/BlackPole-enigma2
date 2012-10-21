@@ -475,7 +475,7 @@ class DeliteScript(Screen):
 		if mysel:
 			mysel = mysel[0]
 			mysel2 = "/usr/script/" + mysel + ".sh"
-			mytitle = "Black Hole E2 Script: " + mysel
+			mytitle = "Black Pole E2 Script: " + mysel
 			self.session.open(Console, title=mytitle, cmdlist=[mysel2])
 
 class DeliteGp:
