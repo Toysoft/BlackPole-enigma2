@@ -1032,7 +1032,7 @@
             <widget name="key_green" position="383,260" zPosition="1" size="250,40" font="Regular;24"  halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
         </screen>
 	<!-- 45 Black PoleDevice Mountpoints Setup  ( 2 )-->
-	<screen name="Bh_Bepg_setuP" position="center,center" size="900,340" title="Black PoleDevices Mountpoints Setup">
+	<screen name="Bh_Bepg_setuP" position="center,center" size="900,340" title="Black Pole Devices Mountpoints Setup">
 	  <ePixmap pixmap="skin_default/frame_box-fs8.png" zPosition="-1" position="0,0" size="900,340" alphatest="on" />	
         <widget name="config" position="20,10" size="860,290" scrollbarMode="showOnDemand" transparent="1" />
         <ePixmap pixmap="skin_default/buttons/red25.png" position="133,260" size="250,40" alphatest="on" />
@@ -1238,7 +1238,7 @@
 		<widget name="infotext" position="20,20" size="670,390" font="Regular;20" transparent="1"/>
 	</screen>
 	<!-- 69 DeliteDevicesPanel ( 2 )-->
-	<screen name="DeliteDevicesPanel" position="center,center" size="800,520" title="Black PoleDevices Manager">
+	<screen name="DeliteDevicesPanel" position="center,center" size="800,520" title="Black Pole Devices Manager">
 	  <ePixmap pixmap="skin_default/frame_box-fs8.png" zPosition="-1" position="0,0" size="800,520" alphatest="on" />	
         <widget source="list" render="Listbox" position="20,20" size="760,510" scrollbarMode="showOnDemand" transparent="1" >
             <convert type="TemplatedMultiContent">
@@ -1259,7 +1259,7 @@
 		<widget name="key_yellow" position="450,460" zPosition="2" size="250,40" font="Regular;24" halign="center" valign="center" backgroundColor="transpBlack" transparent="1" />
     </screen>
     <!-- 70-DeliteSetupDevicePanelConfl ( 2 )-->
-    <screen name="DeliteSetupDevicePanelConf" position="center,center" size="950,420" title="Black PoleDevices Mountpoints Setup">
+    <screen name="DeliteSetupDevicePanelConf" position="center,center" size="950,420" title="Black Pole Devices Mountpoints Setup">
       <ePixmap pixmap="skin_default/frame_box-fs8.png" zPosition="-1" position="0,0" size="950,420" alphatest="on" />	
         <widget name="config" position="20,10" size="910,275" scrollbarMode="showOnDemand" transparent="1"/>
         <widget name="Linconn" position="20,285" size="910,20" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313"/>
