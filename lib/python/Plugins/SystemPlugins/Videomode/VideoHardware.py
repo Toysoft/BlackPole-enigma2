@@ -60,7 +60,9 @@ class VideoHardware:
 
 	modes["Scart"] = ["PAL", "NTSC", "Multi"]
 	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
+#BP
+#	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
+	modes["DVI"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
 
 	def getOutputAspect(self):
@@ -114,7 +116,9 @@ class VideoHardware:
 					has1080p50 = True
 
 		if has1080p50:
-			self.widescreen_modes = set(["720p", "1080i", "1080p"])
+#BP
+#			self.widescreen_modes = set(["720p", "1080i", "1080p"])
+			self.widescreen_modes = set(["720p", "1080p"])
 		else:
 			self.widescreen_modes = set(["720p", "1080i"])
 
