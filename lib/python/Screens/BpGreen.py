@@ -68,7 +68,7 @@ class DeliteGreenPanel(Screen):
 		if runplug is not None:
 			runplug(session=self.session)
 		else:
-			self.session.open(MessageBox, "Fast Plugin not found. You have to setup Fast Plugin before to use this shortcut.", MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Fast Plugin not found. You have to setup Fast Plugin before to use this shortcut."), MessageBox.TYPE_INFO)
 
 	def keyBlue(self):
 		self.session.open(DeliteScript)
@@ -114,7 +114,7 @@ class DeliteSetupFp(Screen):
 	def save(self):
 		mysel = self["list"].getCurrent()
 		if mysel:
-			message = "Fast plugin set to: " + mysel[0] + "\nKey: 2x Green"
+			message = _("Fast plugin set to: ") + mysel[0] + _("\nKey: 2x Green")
 			mybox = self.session.openWithCallback(self.close, MessageBox, message, MessageBox.TYPE_INFO)
 			mybox.setTitle(_("Configuration Saved"))
 			config.misc.fast_plugin_button.value = mysel[0]
@@ -162,42 +162,42 @@ class DeliteAddons(Screen):
 		
 		mypixmap = mypath + "icons/addons_manager.png"
 		png = LoadPixmap(mypixmap)
-		name = "Online Feeds Extensions"
+		name = _("Online Feeds Extensions")
 		idx = 0
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/addons_manager.png"
 		png = LoadPixmap(mypixmap)
-		name = "Online Feeds all Packages"
+		name = _("Online Feeds all Packages")
 		idx = 1
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/addons_manager.png"
 		png = LoadPixmap(mypixmap)
-		name = "Online Black Pole image update"
+		name = _("Online Black Pole image update")
 		idx = 2
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/nabpackpanel.png"
 		png = LoadPixmap(mypixmap)
-		name = "Manual Install Bh/Bp packges"
+		name = _("Manual Install Bh/Bp packges")
 		idx = 3
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/ipkpackpanel.png"
 		png = LoadPixmap(mypixmap)
-		name = "Manual Install Ipk packges"
+		name = _("Manual Install Ipk packges")
 		idx = 4
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/uninstpanel.png"
 		png = LoadPixmap(mypixmap)
-		name = "Addons Uninstall Panel"
+		name = _("Addons Uninstall Panel")
 		idx = 5
 		res = (name, png, idx)
 		self.list.append(res)
@@ -235,7 +235,7 @@ class DeliteAddons(Screen):
 		if check == 1:
 			self.session.open(Nab_downPanel)
 		else:
-			mybox = self.session.open(MessageBox, "Nothing to install.\nYou have to Upload a bh.tgz package in the /tmp directory before to install Addons", MessageBox.TYPE_INFO)
+			mybox = self.session.open(MessageBox, _("Nothing to install.\nYou have to Upload a bh.tgz package in the /tmp directory before to install Addons"), MessageBox.TYPE_INFO)
 			mybox.setTitle(_("Info"))
 			
 	def checkPanel2(self):
@@ -247,7 +247,7 @@ class DeliteAddons(Screen):
 		if check == 1:
 			self.session.open(Nab_downPanelIPK)
 		else:
-			mybox = self.session.open(MessageBox, "Nothing to install.\nYou have to Upload an ipk package in the /tmp directory before to install Addons", MessageBox.TYPE_INFO)
+			mybox = self.session.open(MessageBox, _("Nothing to install.\nYou have to Upload an ipk package in the /tmp directory before to install Addons"), MessageBox.TYPE_INFO)
 			mybox.setTitle(_("Info"))
 			
 			
@@ -289,9 +289,9 @@ class Nab_downPanel(Screen):
 		self.sel = self["list"].getCurrent()
 		if self.sel:
 			self.sel = self.sel[0]
-			message = "Do you want to install the Addon:\n " + self.sel + " ?"
+			message = _("Do you want to install the Addon:\n ") + self.sel + " ?"
 			ybox = self.session.openWithCallback(self.installadd2, MessageBox, message, MessageBox.TYPE_YESNO)
-			ybox.setTitle("Installation Confirm")
+			ybox.setTitle(_("Installation Confirm"))
 
 	def installadd2(self, answer):
 		if answer is True:
@@ -305,11 +305,11 @@ class Nab_downPanel(Screen):
 			rc = system(cmd)
 			if fileExists("/usr/sbin/nab_e2_restart.sh"):
 				rc = system("rm -f /usr/sbin/nab_e2_restart.sh")
-				mybox = self.session.openWithCallback(self.hrestEn, MessageBox, "Gui will be now hard restarted to complete package installation.\nPress ok to continue", MessageBox.TYPE_INFO)
-				mybox.setTitle("Info")
+				mybox = self.session.openWithCallback(self.hrestEn, MessageBox, _("Gui will be now hard restarted to complete package installation.\nPress ok to continue"), MessageBox.TYPE_INFO)
+				mybox.setTitle(_("Info"))
 			else:
-				mybox = self.session.open(MessageBox, "Addon Succesfully Installed.", MessageBox.TYPE_INFO)
-				mybox.setTitle("Info")
+				mybox = self.session.open(MessageBox, _("Addon Succesfully Installed."), MessageBox.TYPE_INFO)
+				mybox.setTitle(_("Info"))
 				self.close()
 
 	def hrestEn(self, answer):
@@ -340,7 +340,7 @@ class Nab_downPanelIPK(Screen):
 				self.flist.append(res)
 				idx = idx + 1
 		
-		self["warntext"] = Label("Here you can install any kind of ipk packages.")
+		self["warntext"] = Label(_("Here you can install any kind of ipk packages."))
 		self["list"] = List(self.flist)
 		
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
@@ -354,9 +354,9 @@ class Nab_downPanelIPK(Screen):
 		self.sel = self["list"].getCurrent()
 		if self.sel:
 			self.sel = self.sel[0]
-			message = "Do you want to install the Addon:\n " + self.sel + " ?"
+			message = _("Do you want to install the Addon:\n ") + self.sel + " ?"
 			ybox = self.session.openWithCallback(self.installadd2, MessageBox, message, MessageBox.TYPE_YESNO)
-			ybox.setTitle("Installation Confirm")
+			ybox.setTitle(_("Installation Confirm"))
 
 	def installadd2(self, answer):
 		if answer is True:
@@ -365,7 +365,7 @@ class Nab_downPanelIPK(Screen):
 			chdir("/")
 			cmd = "opkg install " + dest
 			cmd2 = "rm -f " + dest
-			self.session.open(Console, title="Ipk Package Installation", cmdlist=[cmd, cmd2])
+			self.session.open(Console, title=_("Ipk Package Installation"), cmdlist=[cmd, cmd2])
 			chdir(mydir)
 
 class Nab_uninstPanel(Screen):
@@ -401,7 +401,7 @@ class Nab_uninstPanel(Screen):
 		self.sel = self["list"].getCurrent()
 		if self.sel:
 			self.sel = self.sel[0]
-			message = "Are you sure you want to Remove Package:\n " + self.sel + "?"
+			message = _("Are you sure you want to Remove Package:\n ") + self.sel + "?"
 			ybox = self.session.openWithCallback(self.uninstPack, MessageBox, message, MessageBox.TYPE_YESNO)
 			ybox.setTitle("Uninstall Confirmation")
 		
@@ -411,7 +411,7 @@ class Nab_uninstPanel(Screen):
 			orig = "/usr/uninstall/" + self.sel
 			cmd = "sh " + orig
 			rc = system(cmd)
-			mybox = self.session.open(MessageBox, "Addon Succesfully Removed.", MessageBox.TYPE_INFO)
+			mybox = self.session.open(MessageBox, _("Addon Succesfully Removed."), MessageBox.TYPE_INFO)
 			mybox.setTitle("Info")
 			self.close()
 
@@ -430,7 +430,7 @@ class DeliteScript(Screen):
 		Screen.__init__(self, session)
 		
 		self["statuslab"] = Label("N/A")
-		self["key_red"] = Label("Execute")
+		self["key_red"] = Label(_("Execute"))
 		self.mlist = []
 		self.populateSL()
 		self["list"] = List(self.mlist)
@@ -475,7 +475,7 @@ class DeliteScript(Screen):
 		if mysel:
 			mysel = mysel[0]
 			mysel2 = "/usr/script/" + mysel + ".sh"
-			mytitle = "Black Pole E2 Script: " + mysel
+			mytitle = _("Black Pole E2 Script: ") + mysel
 			self.session.open(Console, title=mytitle, cmdlist=[mysel2])
 
 class DeliteGp:
