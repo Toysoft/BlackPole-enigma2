@@ -22,7 +22,7 @@ class DeliteDevicesPanel(Screen):
 		Screen.__init__(self, session)
 		self["key_red"] = Label(_("Mountpoints"))
 		self["key_yellow"] = Label(_("Cancel"))
-		self["lab1"] = Label("Wait please while scanning your devices...")
+		self["lab1"] = Label(_("Wait please while scanning your devices..."))
 		
 		self.list = []
 		self["list"] = List(self.list)
@@ -67,7 +67,7 @@ class DeliteDevicesPanel(Screen):
 			model = self.get_Dmodel(device)
 			mountpoint = self.get_Dpoint(uuid)
 			name = "%s: %s" % (category, model)
-			description = " device: %s  size: %s\n mountpoint: %s" % (parts[0], size, mountpoint)
+			description = _(" device: %s  size: %s\n mountpoint: %s" % (parts[0], size, mountpoint))
 			self.list.append((name, description, png))
 			description = "%s  %s  %s" % (name, size, partition)
 			self.conflist.append((description, uuid))
@@ -136,7 +136,7 @@ class DeliteSetupDevicePanelConf(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = Label(_("Save"))
 		self["key_green"] = Label(_("Cancel"))
-		self["Linconn"] = Label("Wait please while scanning your box devices...")
+		self["Linconn"] = Label(_("Wait please while scanning your box devices..."))
 		
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
@@ -203,7 +203,7 @@ class DeliteSetupDevicePanelConf(Screen, ConfigListScreen):
 		f.close()
 		out.close()
 		os_rename("/etc/fstab.tmp", "/etc/fstab")
-		message = "Devices changes need a system restart to take effects.\nRestart your Box now?"
+		message = _("Devices changes need a system restart to take effects.\nRestart your Box now?")
 		self.session.openWithCallback(self.restBo, MessageBox, message, MessageBox.TYPE_YESNO)
 			
 	def restBo(self, answer):
