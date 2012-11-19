@@ -183,14 +183,14 @@ class DeliteAddons(Screen):
 		
 		mypixmap = mypath + "icons/nabpackpanel.png"
 		png = LoadPixmap(mypixmap)
-		name = _("Manual Install Bh/Bp packges")
+		name = _("Manual Install Bh/Bp packages")
 		idx = 3
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/ipkpackpanel.png"
 		png = LoadPixmap(mypixmap)
-		name = _("Manual Install Ipk packges")
+		name = _("Manual Install Ipk packages")
 		idx = 4
 		res = (name, png, idx)
 		self.list.append(res)
