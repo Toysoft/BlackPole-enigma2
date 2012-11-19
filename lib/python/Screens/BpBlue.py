@@ -42,7 +42,7 @@ class DeliteBluePanel(Screen):
 		self.emlist = []
 		self.populate_List()
 		self["list"] = MenuList(self.emlist)
-		self["lab1"].setText("%d  CAMs Installed" % (len(self.emlist)))
+		self["lab1"].setText(_("%d  CAMs Installed") % (len(self.emlist)))
 		self.onShow.append(self.updateBP)
 
 	def populate_List(self):
@@ -74,10 +74,10 @@ class DeliteBluePanel(Screen):
 		except:
 			name = "N/A"; provider = "N/A"; aspect = "N/A"; videosize  = "N/A"	
 		
-		self["Ilab1"].setText("Name: " + name)
-		self["Ilab2"].setText("Provider: " + provider)
-		self["Ilab3"].setText("Aspect Ratio: " + aspect)
-		self["Ilab4"].setText("Videosize: " + videosize)
+		self["Ilab1"].setText(_("Name: ") + name)
+		self["Ilab2"].setText(_("Provider: ") + provider)
+		self["Ilab3"].setText(_("Aspect Ratio: ") + aspect)
+		self["Ilab4"].setText(_("Videosize: ") + videosize)
 	
 		self.defaultcam = "/usr/camscript/Ncam_Ci.sh"
 		if fileExists("/etc/BhCamConf"):
@@ -106,7 +106,7 @@ class DeliteBluePanel(Screen):
 				mytext = mytext + line.strip() + "\n"
  			f.close()
 		if len(mytext) < 5:
-			mytext = "\n\n    Ecm Info not available."
+			mytext = "\n\n    " + _("Ecm Info not available.")
 				
 		self["activecam"].setText(self.defCamname)
 		self["Ecmtext"].setText(mytext)
@@ -152,17 +152,14 @@ class DeliteBluePanel(Screen):
             	client_socket.close()
 				
 	def keyYellow(self):
-		if fileExists("/proc/blackhole/version"):
-			self.session.open(MessageBox, "Wrong kernel version. Please install Black Pole image in Flash.", MessageBox.TYPE_INFO)
-		else:
-			self.session.open(BhsysInfo)
+		self.session.open(BhsysInfo)
 
 	def keyBlue(self):
 		from Screens.BpSet import DeliteSettings
 		self.session.open(DeliteSettings)
 		
 	def keyGreen(self):
-		self.session.open(MessageBox, "Sorry, function not available in Black Pole", MessageBox.TYPE_INFO)
+		self.session.open(MessageBox, _("Sorry, function not available in Black Pole"), MessageBox.TYPE_INFO)
 		
 	def keyRed(self):
 		from Plugins.SystemPlugins.CrossEPG.crossepg_main import crossepg_main
@@ -181,7 +178,7 @@ class startstopCam(Screen):
 	def __init__(self, session, name, what):
 		Screen.__init__(self, session)
 		
-		msg = "Please wait while %s\n %s ..." % (what, name)
+		msg = _("Please wait while ") + "%s\n %s ..." % (what, name)
 		self["lab1"] = Label(msg)
 		self.delay = 800
 		if what == "starting":
@@ -221,15 +218,14 @@ class BhsysInfo(Screen):
 		
 	def updateInfo(self):
 		rc = system("df -h > /tmp/syinfo.tmp")
-		text = "BOX\n"
-		text += "Brand:\tVuplus\n"
+		text = _("BOX\n") + _("Brand:") + "\tVuplus\n"
 		f = open("/proc/stb/info/vumodel",'r')
- 		text += "Model:\t" + f.readline()
+ 		text += _("Model:\t") + f.readline()
  		f.close()
 		f = open("/proc/stb/info/chipset",'r')
- 		text += "Chipset:\t" + f.readline() +"\n"
+ 		text += _("Chipset:\t") + f.readline() +"\n"
  		f.close()
-		text += "MEMORY\n"
+		text += _("MEMORY\n")
 		memTotal = memFree = swapTotal = swapFree = 0
 		for line in open("/proc/meminfo",'r'):
 			parts = line.split(':')
@@ -242,18 +238,18 @@ class BhsysInfo(Screen):
 				swapTotal = parts[1].strip()
 			elif key == "SwapFree":
 				swapFree = parts[1].strip()
-		text += "Total memory:\t%s\n" % memTotal
-		text += "Free memory:\t%s kB\n"  % memFree
-		text += "Swap total:\t%s \n"  % swapTotal
-		text += "Swap free:\t%s \n"  % swapFree
-		text += "\nSTORAGE\n"
+		text += _("Total memory:") + "\t%s\n" % memTotal
+		text += _("Free memory:") + "\t%s kB\n"  % memFree
+		text += _("Swap total:") + "\t%s \n"  % swapTotal
+		text += _("Swap free:") + "\t%s \n"  % swapFree
+		text += "\n" + _("STORAGE") + "\n"
 		f = open("/tmp/syinfo.tmp",'r')
 		line = f.readline()
 		parts = line.split()
 		text += parts[0] + "\t" + parts[1].strip() + "      " + parts[2].strip() + "    " + parts[3].strip() + "    " + parts[4] + "\n"
 		line = f.readline()
 		parts = line.split()
-		text += "Flash" + "\t" + parts[1].strip() + "  " + parts[2].strip()  + "  " +  parts[3].strip()  + "  " +  parts[4] + "\n"
+		text += _("Flash") + "\t" + parts[1].strip() + "  " + parts[2].strip()  + "  " +  parts[3].strip()  + "  " +  parts[4] + "\n"
  		for line in f.readlines():
 			if line.find('/media/') != -1:
 				line = line.replace('/media/', '   ')
@@ -263,7 +259,7 @@ class BhsysInfo(Screen):
 		f.close()
 		os_remove("/tmp/syinfo.tmp")
 		
-		text += "\nSOFTWARE\n"
+		text += "\n" + _("SOFTWARE") + "\n"
 		f = open("/etc/bpversion",'r')
 		text += "Firmware v.:\t" + f.readline()
 		f.close()
