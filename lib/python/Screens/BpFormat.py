@@ -22,11 +22,7 @@ class Bp_UsbFormat(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		
-		msg = """This wizard will help you to format Usb mass storages for Linux.
-Please be sure that your usb drive is not connected to your Vu+ box before to continue.
-If your usb drive is connected and mounted you have to poweroff your box, remove the usb device and reboot.
-Push red button to continue when you are ready and your usb is disconnected.
-"""
+		msg = _("This wizard will help you to format Usb mass storages for Linux.\nPlease be sure that your usb drive is not connected to your Vu+ box before to continue.\nIf your usb drive is connected and mounted you have to poweroff your box, remove the usb device and reboot.\nPush red button to continue when you are ready and your usb is disconnected.\n")
 		self["key_red"] = Label(_("Continue ->"))
 		self["key_green"] = Label(_("Cancel"))
 		self["lab1"] = Label(msg)
@@ -43,17 +39,13 @@ Push red button to continue when you are ready and your usb is disconnected.
 	
 	
 	def stepOne(self):
-		msg = """Connect your usb storage to your Vu+ box
-Press red button to continue when ready.
-"""
+		msg = _("Connect your usb storage to your Vu+ box\nPress red button to continue when ready.")
 		self.devices = self.get_Devicelist()
 		self["lab1"].setText(msg)
 		self.step = 2
 		
 	def stepTwo(self):
-		msg = """The wizard will now try to identify your connected usb storage.
-Press red button to continue.
-"""				
+		msg = _("The wizard will now try to identify your connected usb storage.\nPress red button to continue.")
 		self["lab1"].setText(msg)
 		self.step = 3
 	
@@ -63,10 +55,10 @@ Press red button to continue.
 			if d not in self.devices:
 				self.device = d
 		if self.device is None:
-			self.wizClose("Sorry, no new usb storage detected.\nBe sure to follow wizard instructions.")
+			self.wizClose(_("Sorry, no new usb storage detected.\nBe sure to follow wizard instructions."))
 		else:
 			msg = self.get_Deviceinfo(self.device)
-			msg +="\nWarning: all the data will be lost.\nAre you sure you want to format this device?\n"
+			msg += _("\nWarning: all the data will be lost.\nAre you sure you want to format this device?\n")
 			self["lab1"].setText(msg)
 			self.step = 4
 			
@@ -130,7 +122,7 @@ Press red button to continue.
 	
 	
 	def succesS(self):
-		self.wizClose("Usb storage formatted.\nYou can now use the Black Pole Devices Manager to assign your preferred mount point.")
+		self.wizClose(_("Usb storage formatted.\nYou can now use the Black Pole Devices Manager to assign your preferred mount point."))
 
 	def wizClose(self, msg):
 		self.session.openWithCallback(self.close, MessageBox, msg, MessageBox.TYPE_INFO)
