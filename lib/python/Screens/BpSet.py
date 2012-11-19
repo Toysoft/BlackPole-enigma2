@@ -90,7 +90,7 @@ class DeliteSettings(Screen):
 			self.noYet()
 		
 	def noYet(self):
-		nobox = self.session.open(MessageBox, "Function Not Yet Available", MessageBox.TYPE_INFO)
+		nobox = self.session.open(MessageBox, _("Function Not Yet Available"), MessageBox.TYPE_INFO)
 		nobox.setTitle(_("Info"))
 	
 		
@@ -102,98 +102,98 @@ class DeliteSettings(Screen):
 		
 		mypixmap = mypath + "icons/infopanel_space.png"
 		png = LoadPixmap(mypixmap)
-		name = "Devices Manager & Mountpoints"
+		name = _("Devices Manager & Mountpoints")
 		idx = 0
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/mountwizard.png"
 		png = LoadPixmap(mypixmap)
-		name = "Network Browser & Mountpoints"
+		name = _("Network Browser & Mountpoints")
 		idx = 1
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_samba.png"
 		png = LoadPixmap(mypixmap)
-		name = "Dlna Browser & UPnP Client"
+		name = _("Dlna Browser & UPnP Client")
 		idx = 2
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_samba.png"
 		png = LoadPixmap(mypixmap)
-		name = "Dlna Server Minidlna"
+		name = _("Dlna Server Minidlna")
 		idx = 3
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_space.png"
 		png = LoadPixmap(mypixmap)
-		name = "Usb Format Wizard"
+		name = _("Usb Format Wizard")
 		idx = 4
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/swapsettings.png"
 		png = LoadPixmap(mypixmap)
-		name = "Swap File settings"
+		name = _("Swap File settings")
 		idx = 5
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_osd.png"
 		png = LoadPixmap(mypixmap)
-		name = "Osd settings"
+		name = _("Osd settings")
 		idx = 6
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_osd.png"
 		png = LoadPixmap(mypixmap)
-		name = "Osd Position setup"
+		name = _("Osd Position setup")
 		idx = 7
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_osd.png"
 		png = LoadPixmap(mypixmap)
-		name = "Osd 3D setup"
+		name = _("Osd 3D setup")
 		idx = 8
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_samba.png"
 		png = LoadPixmap(mypixmap)
-		name = "Internal Epg settings"
+		name = _("Internal Epg settings")
 		idx = 9
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_cron.png"
 		png = LoadPixmap(mypixmap)
-		name = "Record settings"
+		name = _("Record settings")
 		idx = 10
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/infopanel_space.png"
 		png = LoadPixmap(mypixmap)
-		name = "Recording paths"
+		name = _("Recording paths")
 		idx = 11
 		res = (name, png, idx)
 		self.list.append(res)
 				
 		mypixmap = mypath + "icons/infopanel_kmod.png"
 		png = LoadPixmap(mypixmap)
-		name = "Subtitle settings"
+		name = _("Subtitle settings")
 		idx = 12
 		res = (name, png, idx)
 		self.list.append(res)
 		
 		mypixmap = mypath + "icons/inadynsettings.png"
 		png = LoadPixmap(mypixmap)
-		name = "Auto language settings"
+		name = _("Auto language settings")
 		idx = 13
 		res = (name, png, idx)
 		self.list.append(res)
@@ -263,13 +263,13 @@ class BhMinidlna(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		
-		mytext = "Minidlna: UPnP media server Black Pole version.\nMinidlna is fully configured for your box and ready to work. Just enable it and play.\nMinidlna include little web interface.\n\nMinidlna webif url: http://ip_box:8200\nMinidlna config: /etc/minidlna.conf\nMinidlna home site: http://sourceforge.net/projects/minidlna/"
+		mytext = _("Minidlna: UPnP media server Black Pole version.\nMinidlna is fully configured for your box and ready to work. Just enable it and play.\nMinidlna include little web interface.\n\nMinidlna webif url: http://ip_box:8200\nMinidlna config: /etc/minidlna.conf\nMinidlna home site: http://sourceforge.net/projects/minidlna/")
 		self["lab1"] = Label(mytext)
 		self["lab2"] = Label(_("Current Status:"))
 		self["labstop"] = Label(_("Stopped"))
 		self["labrun"] = Label(_("Running"))
-		self["key_red"] = Label("Enable")
-		self["key_green"] = Label("Disable")
+		self["key_red"] = Label(_("Enable"))
+		self["key_green"] = Label(_("Disable"))
 		self.my_serv_active = False
 				
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
@@ -284,7 +284,7 @@ class BhMinidlna(Screen):
 
 	def ServStart(self):
 		if self.my_serv_active == True:
-			self.session.open(MessageBox, "Minidlna already up and running.", MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Minidlna already up and running."), MessageBox.TYPE_INFO)
 		else:
 			rc = system("ln -s ../init.d/minidlna /etc/rc3.d/S90minidlna")
 			rc = system("/etc/init.d/minidlna start")
@@ -299,8 +299,8 @@ class BhMinidlna(Screen):
 			if fileExists("/etc/rc3.d/S90minidlna"):
 				os_remove("/etc/rc3.d/S90minidlna")
 				
-			mybox = self.session.open(MessageBox, "Minidlna Server Disabled.", MessageBox.TYPE_INFO)
-			mybox.setTitle("Info")
+			mybox = self.session.open(MessageBox, _("Minidlna Server Disabled."), MessageBox.TYPE_INFO)
+			mybox.setTitle(_("Info"))
 			rc = system("sleep 1")
 			self.updateServ()
 		
