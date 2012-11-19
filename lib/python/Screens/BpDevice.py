@@ -246,14 +246,14 @@ class BlackPoleSwap(Screen):
 	
 	def updateSwap(self):
 		self.swap_file = ""
-		swapinfo = "Swap status: disabled"
+		swapinfo = _("Swap status: disabled")
 		f = open("/proc/swaps",'r')
  		for line in f.readlines():
 			if line.find('swapfile') != -1:
 				parts = line.split()
 				self.swap_file = parts[0].strip()
 				size = int(parts[2].strip()) / 1024
-				swapinfo = "Swap status: active\nSwap file: %s \nSwap size: %d M \nSwap used: %s Kb" % (self.swap_file, size, parts[3].strip())
+				swapinfo = _("Swap status: active\nSwap file: %s \nSwap size: %d M \nSwap used: %s Kb") % (self.swap_file, size, parts[3].strip())
 
 		f.close()
 		self["lab1"].setText(swapinfo)
@@ -270,11 +270,11 @@ class BlackPoleSwap(Screen):
 				pass
 			self.updateSwap()
 		else:
-			self.session.open(MessageBox, "Swap already disabled.", MessageBox.TYPE_INFO)	
+			self.session.open(MessageBox, _("Swap already disabled."), MessageBox.TYPE_INFO)	
 	
 	def keyRed(self):
 		if self.swap_file:
-			self.session.open(MessageBox, "Swap file is active.\nRemove it before to create a new swap space.", MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _("Swap file is active.\nRemove it before to create a new swap space."), MessageBox.TYPE_INFO)
 		else:
 			options =[]
 			f = open("/proc/mounts",'r')
@@ -287,7 +287,7 @@ class BlackPoleSwap(Screen):
 						options.append([parts[1].strip(), parts[1].strip()])
 			f.close()
 			if len(options) == 0:
-				self.session.open(MessageBox, "Sorry no valid device found.\nBe sure your device is Linux formatted and mapped.\nPlease use Black Pole format wizard and Black Pole device manager to prepare and map your usb stick.", MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Sorry no valid device found.\nBe sure your device is Linux formatted and mapped.\nPlease use Black Pole format wizard and Black Pole device manager to prepare and map your usb stick."), MessageBox.TYPE_INFO)
 			else:
 				self.session.openWithCallback(self.selectSize,ChoiceBox, title="Select the Swap File device:", list=options)
 	
@@ -296,7 +296,7 @@ class BlackPoleSwap(Screen):
 		if device:
 			self.new_swap = device[1] + "/swapfile"
 			options = [['16 Mega', '16384'], ['32 Mega', '32768'], ['64 Mega', '65536'], ['128 Mega', '131072'], ['256 Mega', '262144']]	
-			self.session.openWithCallback(self.swapOn,ChoiceBox, title="Select the Swap File Size:", list=options)
+			self.session.openWithCallback(self.swapOn,ChoiceBox, title=_("Select the Swap File Size:"), list=options)
 			
 		
 	def swapOn(self, size):
@@ -311,9 +311,9 @@ class BlackPoleSwap(Screen):
 				out = open("/etc/bp_swap", "w")
 				out.write(self.new_swap)
 				out.close()
-				self.session.open(MessageBox, "Swap File created.", MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Swap File created."), MessageBox.TYPE_INFO)
 				self.updateSwap()
 			else:
-				self.session.open(MessageBox, "Swap File creation Failed. Check for available space.", MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Swap File creation Failed. Check for available space."), MessageBox.TYPE_INFO)
 			
 
